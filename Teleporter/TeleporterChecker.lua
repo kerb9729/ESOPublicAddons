@@ -17,10 +17,10 @@ function Teleporter.CheckGuildMemeberStatus(index, stringz, type)
     local TeleTotalGuilds = GetNumGuilds()
     local TeleportAllPlayersTable = {}
 
-    for i = 0, TeleTotalGuilds do
+    for i = 1, TeleTotalGuilds do
         local totalGuildMembers = GetNumGuildMembers(GetGuildId(i))
 
-        for j = 0, totalGuildMembers do
+        for j = 1, totalGuildMembers do
             local e = {}
             e.GuildName = GetGuildName(GetGuildId(i))
             e.GuildMember, e.GuildMemberNote, e.GuildMemberRankIndex, e.GuildMemberStatus, e.GuildMemberSecSince = GetGuildMemberInfo(GetGuildId(i), j)
@@ -35,7 +35,8 @@ function Teleporter.CheckGuildMemeberStatus(index, stringz, type)
                     if e.veteranRank == 0 then
                         if pName ~= GetUnitName("player") then
                             if e.alliance == GetUnitAlliance("player") then
-                                if e.GuildMemberSecSince <= 3 then
+                                --if e.GuildMemberSecSince <= 3 then
+                                if e.GuildMemberStatus == 1 then
 
                                     if index == 1 then -- by current zone
                                         if e.zoneName == GetUnitZone("player") then
@@ -68,7 +69,8 @@ function Teleporter.CheckGuildMemeberStatus(index, stringz, type)
 
                 if pName ~= GetUnitName("player") then
                     if e.alliance == GetUnitAlliance("player") then
-                        if e.GuildMemberSecSince == 0 then
+                        --if e.GuildMemberSecSince == 0 then
+                        if e.GuildMemberStatus == 1 then
                             if index == 1 then -- by current zone
                                 if e.zoneName == GetUnitZone("player") then
                                     table.insert(TeleportAllPlayersTable, e)
